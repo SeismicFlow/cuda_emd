@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cuda_emd"
+version = "1.0.0"
+description = "EMD, EEMD and CEEMDAN on NVIDIA GPUs, bit-for-bit identical to PyEMD and with the PyEMD interface"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Matin Mahzad", email = "matinmahzad@yahoo.com" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+keywords = [
+    "empirical mode decomposition", "EMD", "EEMD", "CEEMDAN", "Hilbert-Huang transform",
+    "GPU", "CUDA", "CuPy", "PyEMD", "signal processing", "reproducibility",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Environment :: GPU :: NVIDIA CUDA",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.optional-dependencies]
+# CuPy is distributed as one binary wheel per CUDA major version; install the one matching your driver.
+cuda12 = ["cupy-cuda12x>=13.0"]
+cuda13 = ["cupy-cuda13x>=14.0"]
+# SciPy lets the package probe the rounding of the installed reference stack; PyEMD is needed only for the
+# comparison scripts, the plotting helper (Visualisation) and the CPU-side helper methods of the drop-in classes.
+reference = ["scipy", "EMD-signal==1.10.0"]
+
+[project.urls]
+Homepage = "https://github.com/SeismicFlow/cuda_emd"
+Source = "https://github.com/SeismicFlow/cuda_emd"
+Issues = "https://github.com/SeismicFlow/cuda_emd/issues"
+
+[tool.setuptools]
+packages = ["cuda_emd"]
